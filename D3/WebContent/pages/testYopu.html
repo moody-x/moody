@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<svg width="480" height="480"></svg>
+<script src="../js/d3/d3.v4.js"></script>
+<script>
+	var oneData = [ {
+		"id" : "ME1",
+		"target" : "ME1",
+		"type" : "ManagedElement",
+		"alarm" : "0"
+	}, {
+		"id" : "BIGFUNC",
+		"target" : "ME1",
+		"type" : "BIGFUNCTION",
+		"alarm" : "0"
+	}, {
+		"id" : "ICSCF",
+		"target" : "ME1",
+		"type" : "ICSCFUNCTION",
+		"alarm" : "0"
+	}, {
+		"id" : "SCSCF",
+		"target" : "ME1",
+		"type" : "SCSCFUNCTION",
+		"alarm" : "0"
+	}, {
+		"id" : "eth1",
+		"target" : "BIGFUNC",
+		"type" : "ETH",
+		"alarm" : "0"
+	}, {
+		"id" : "eth2",
+		"target" : "ICSCF",
+		"type" : "ETH",
+		"alarm" : "1"
+	} ];
+	;
+
+	var svg = d3.select("svg"), width = +svg.attr("width"), height = +svg
+			.attr("height"), color = d3.scaleOrdinal(d3.schemeCategory10);
+
+	var nodes = [];
+	var links = [];
+
+	var links1 = [];
+	for (var i = 0; i < oneData.length; i++) {
+		nodes.push({
+			id : oneData[i].id,
+			type : oneData[i].type,
+			alarm : oneData[i].alarm
+		});
+		if ("" != oneData[i].target) {
+			links1.push({
+				source : {
+					id : oneData[i].target
+				},
+				target : {
+					id : oneData[i].id
+				},
+			});
+		}
+	}
+
+	for (var j = 0; j < links1.length; j++) {
+		var source_nodes;
+		var target_nodes;
+
+		for (var k = 0; k < nodes.length; k++) {
+			if (links1[j].source.id == nodes[k].id) {
+				source_nodes = nodes[k];
+			}
+			if (links1[j].target.id == nodes[k].id) {
+				target_nodes = nodes[k];
+			}
+		}
+
+		links.push({
+			source : source_nodes,
+			target : target_nodes
+		})
+	}
+
+	var simulation = d3.forceSimulation(nodes)
+	.force("charge", d3.forceManyBody().strength(-1000))
+	.force("link", d3.forceLink(links).distance(200).strength(1))
+	.force("x", d3.forceX())
+	.force("y", d3.forceY())
+	.alphaTarget(1)
+	.on("tick", ticked);
+
+	var g = svg.append("g").attr("transform",
+			"translate(" + width / 2 + "," + height / 2 + ")"), link = g
+			.append("g").attr("stroke", "#000").attr("stroke-width", 1.5)
+			.selectAll(".link"), node = g.append("g").attr("stroke", "#fff")
+			.attr("stroke-width", 1.5).selectAll(".node"), text = g.append("g")
+			.attr("stroke", "#000").attr("stroke-width", 1.5)
+			//.attr("transform", "rotate(30 20,40)")
+			.attr("font-size", "8px").attr("font-family", "SimSun").attr(
+					"font-weight", "200").selectAll(".text");
+
+	// 定义一个tooltip
+	var tooltip = d3.select("body").append("div").attr("class", "tooltip")
+			.attr("opacity", 0.0);
+
+	restart();
+
+	var delNode = [];
+
+	d3.interval(function() {
+
+		for (var i = 0; i < links.length; i++) {
+			if ("0" != links[i].source.alarm || "0" != links[i].target.alarm) {
+				//removeByValue(links, d);
+				delNode.push(links[i]);
+				links.splice(i, 1);
+			}
+		}
+
+		restart();
+
+	}, 2000, d3.now());
+
+	d3.interval(function() {
+
+		for (var i = 0; i < delNode.length; i++) {
+			links.push(delNode.pop());
+
+		}
+
+		restart();
+
+	}, 2000, d3.now() + 1000);
+
+	function dragstarted(d) {
+		d3.select(this).raise().classed("active", true);
+	}
+
+	function dragged(d) {
+		d3.select(this).select("circle").attr("cx", d.x = d3.event.x).attr(
+				"cy", d.y = d3.event.y);
+		cell = cell.data(voronoi.polygons(circles)).attr("d", renderCell);
+	}
+
+	function dragended(d, i) {
+		d3.select(this).classed("active", false);
+	}
+
+	function ticked() {
+		node.attr("x", function(d) {
+			return d.x - 10;
+		}).attr("y", function(d) {
+			return d.y - 10;
+		})
+
+		text.attr("x", function(d) {
+			return d.x - 30;
+		}).attr("y", function(d) {
+			return d.y + 15;
+		})
+
+		link.attr("x1", function(d) {
+			return d.source.x;
+		}).attr("y1", function(d) {
+			return d.source.y;
+		}).attr("x2", function(d) {
+			return d.target.x;
+		}).attr("y2", function(d) {
+			return d.target.y;
+		});
+	}
+
+	function restart() {
+
+		node = node.data(nodes, function(d) {
+			return d.id;
+		});
+
+		node.exit().transition().attr("height", 0).attr("width", 0).remove();
+
+		node = node.enter().append("image").attr("title", node.id).call(
+				d3.drag().on("start", dragstarted).on("drag", dragged).on(
+						"end", dragended)).attr("href", function(d) {
+
+			var imgUrl;
+
+			if ("ME1" == d.id) {
+				imgUrl = "../images/nfvo/网元.png";
+			} else if ("BIGFUNC" == d.id) {
+				imgUrl = "../images/nfvo/主机.png";
+			} else if ("ICSCF" == d.id) {
+				imgUrl = "../images/nfvo/物理机.png";
+			} else if ("SCSCF" == d.id) {
+				imgUrl = "../images/nfvo/虚拟机.png";
+			} else if (d.id.indexOf("eth") > -1) {
+				imgUrl = "../images/nfvo/以太网端口.png";
+			} else {
+				imgUrl = "../images/nfvo/附属设备.png";
+			}
+			return imgUrl;
+		}).call(function(node) {
+			node.transition().attr("height", 20).attr("width", 20);
+		}).merge(node).text(function(d) {
+			return d.id;
+		});
+
+		text = text.data(nodes, function(d) {
+			return d.id;
+		});
+
+		text.exit().transition().attr("dx", 20).attr("dy", 8).remove();
+
+		text = text.enter().append("text").attr("fill", function(d) {
+			return color(d.id);
+		}).call(function(node) {
+			node.transition().attr("dx", 20).attr("dy", 8);
+		}).merge(text).text(function(d) {
+			return d.id;
+		});
+
+		link = link.data(links, function(d) {
+			return d.source.id + "-" + d.target.id;
+		});
+
+		link.exit().transition().attr("stroke-opacity", 0).attrTween("x1",
+				function(d) {
+					return function() {
+						return d.source.x;
+					};
+				}).attrTween("x2", function(d) {
+			return function() {
+				return d.target.x;
+			};
+		}).attrTween("y1", function(d) {
+			return function() {
+				return d.source.y;
+			};
+		}).attrTween("y2", function(d) {
+			return function() {
+				return d.target.y;
+			};
+		}).remove();
+
+		link = link.enter().append("line").call(function(link) {
+			link.transition().attr("stroke-opacity", 1);
+		}).merge(link);
+
+		simulation.nodes(nodes);
+		simulation.force("link").links(links);
+		simulation.alpha(1).restart();
+	}
+
+	node.on(
+			"mouseover",
+			function(d) {
+
+				var x = d3.event.pageX;
+				var y = d3.event.pageY + 20;
+				svg.append("text").attr("id", "tooltip").attr("x", x).attr("y",
+						y).attr("text-anchor", "middle").attr("font-family",
+						"sans-setif").attr("font-size", "11px").attr(
+						"font-weight", "bold").attr("fill", "black").text(
+						"设备类型" + d.type);
+			}).on("mouseout", function(d) {
+		d3.select("#tooltip").remove();
+	});
+
+	node.on("click", function(d) {
+		if (2 == d3.event.detail) {
+			alert("你进行了一次双击事件，该元素为id:" + d.id + "类型为:" + d.type);
+		}
+	});
+
+</script>

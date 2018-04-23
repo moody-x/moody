@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<svg width="1364" height="800"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+	
+	var oneData = [{"alarm":"0","id":"3702NSHX1MNE000542","target":"3702NSHX1MNE000542","type":"ManagedElement"},{"alarm":"0","id":"3702NSHX1BGC00047F","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1EPO00051F","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1ICS00045F","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1EPO000523","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1SCS000456","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1EPO0008B2","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO0008B5","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO000522","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1SCS00046A","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1ICS000473","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1EPO000524","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO0008B3","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1ICS000455","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1SCS00044C","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1EPO00051B","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1ICS000469","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1EPO000516","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1ICS00044B","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1EPO00051A","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO000517","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1BGC000461","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1EPO000525","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1SCS000460","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1BGC000457","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1EPO0008B4","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1BGC000475","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1EPO000521","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO000519","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO00051D","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1BGC00044D","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1BGC00046B","target":"3702NSHX1MNE000542","type":"BgcfFunction"},{"alarm":"0","id":"3702NSHX1EPO000518","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1SCS000474","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1EPO00051C","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1ICS00047D","target":"3702NSHX1MNE000542","type":"IcscfFunction"},{"alarm":"0","id":"3702NSHX1EPO000520","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1EPO00051E","target":"3702NSHX1MNE000542","type":"EthernetPort"},{"alarm":"0","id":"3702NSHX1SCS00047E","target":"3702NSHX1MNE000542","type":"ScscfFunction"},{"alarm":"0","id":"3702NSHX1DXI000443","target":"3702NSHX1ICS00045F","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1CXI000511","target":"3702NSHX1ICS00045F","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DNI00050A","target":"3702NSHX1ICS00045F","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1CXS00045B","target":"3702NSHX1SCS000456","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1DXS000458","target":"3702NSHX1SCS000456","type":"EpRpDynDxScscf"},{"alarm":"0","id":"3702NSHX1DNS000545","target":"3702NSHX1SCS000456","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1DXS00046C","target":"3702NSHX1SCS00046A","type":"EpRpDynDxScscf"},{"alarm":"0","id":"3702NSHX1DNS0008B8","target":"3702NSHX1SCS00046A","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1CXS00046F","target":"3702NSHX1SCS00046A","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1CXI0008AC","target":"3702NSHX1ICS000473","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DNI0008B0","target":"3702NSHX1ICS000473","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1DXI000447","target":"3702NSHX1ICS000473","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1DNI00050C","target":"3702NSHX1ICS000455","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1CXI00050E","target":"3702NSHX1ICS000455","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DXI000441","target":"3702NSHX1ICS000455","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1DXS00044E","target":"3702NSHX1SCS00044C","type":"EpRpDynDxScscf"},{"alarm":"0","id":"3702NSHX1DNS000546","target":"3702NSHX1SCS00044C","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1CXS000451","target":"3702NSHX1SCS00044C","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1CXI0008AD","target":"3702NSHX1ICS000469","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DNI0008AE","target":"3702NSHX1ICS000469","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1DXI000445","target":"3702NSHX1ICS000469","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1DNI000514","target":"3702NSHX1ICS00044B","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1DXI00043F","target":"3702NSHX1ICS00044B","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1CXI00050F","target":"3702NSHX1ICS00044B","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DNS000547","target":"3702NSHX1SCS000460","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1CXS000465","target":"3702NSHX1SCS000460","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1DXS000462","target":"3702NSHX1SCS000460","type":"EpRpDynDxScscf"},{"alarm":"0","id":"3702NSHX1DNS0008B9","target":"3702NSHX1SCS000474","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1CXS000479","target":"3702NSHX1SCS000474","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1DXS000476","target":"3702NSHX1SCS000474","type":"EpRpDynDxScscf"},{"alarm":"0","id":"3702NSHX1DNI000512","target":"3702NSHX1ICS00047D","type":"EpRpDynDnsIcscf"},{"alarm":"0","id":"3702NSHX1CXI000510","target":"3702NSHX1ICS00047D","type":"EpRpDynCxIcscf"},{"alarm":"0","id":"3702NSHX1DXI000449","target":"3702NSHX1ICS00047D","type":"EpRpDynDxIcscf"},{"alarm":"0","id":"3702NSHX1CXS000483","target":"3702NSHX1SCS00047E","type":"EpRpDynCxScscf"},{"alarm":"0","id":"3702NSHX1DNS000548","target":"3702NSHX1SCS00047E","type":"EpRpDynDnsScscf"},{"alarm":"0","id":"3702NSHX1DXS000480","target":"3702NSHX1SCS00047E","type":"EpRpDynDxScscf"}];
+
+		var svg = d3.select("svg"), width = +svg.attr("width"), height = +svg
+				.attr("height"), color = d3.scaleOrdinal(d3.schemeCategory10);
+
+		var nodes = [];
+		var links = [];
+
+		var links1 = [];
+		for (var i = 0; i < oneData.length; i++) {
+			nodes.push({
+				id : oneData[i].id,
+				type : oneData[i].type,
+				alarm : oneData[i].alarm
+			});
+			if ("" != oneData[i].target) {
+				
+				if (oneData[i].source != oneData[i].target) {
+					links1.push({
+						source : {
+							id : oneData[i].target
+						},
+						target : {
+							id : oneData[i].id
+						},
+					});
+				}
+			}
+		}
+
+		for (var j = 0; j < links1.length; j++) {
+			var source_nodes;
+			var target_nodes;
+
+			for (var k = 0; k < nodes.length; k++) {
+				if (links1[j].source.id == nodes[k].id) {
+					source_nodes = nodes[k];
+				}
+				if (links1[j].target.id == nodes[k].id) {
+					target_nodes = nodes[k];
+				}
+			}
+
+			links.push({
+				source : source_nodes,
+				target : target_nodes
+			})
+		}
+
+		var simulation = d3.forceSimulation(nodes)
+		// .force("charge", d3.forceManyBody().strength(-400))
+		.force("charge", d3.forceManyBody().strength(-300))
+		// .force("link", d3.forceLink(links).distance(170).strength(1))
+		.force("link", d3.forceLink(links).distance(150).strength(1))
+		.force("x", d3.forceX())
+		.force("y", d3.forceY())
+		// .alphaTarget(1)
+		.on("tick", ticked);
+
+		var g = svg.append("g").attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")"), link = g
+				.append("g").attr("stroke", "#C0C0C0").attr("stroke-width", 1.5)
+				.selectAll(".link"), node = g.append("g").attr("stroke", "#fff")
+				.attr("stroke-width", 1.5).selectAll(".node"), text = g.append("g")
+				.attr("stroke", "#000").attr("stroke-width", 0)
+				.attr("font-size", "13px").attr("font-family", "SimSun").attr(
+						"font-weight", "200").selectAll(".text");
+
+		// 定义一个tooltip
+		var tooltip = d3.select("svg").append("g").attr("class", "tooltip")
+				.attr("opacity", 0.0);
+
+		restart();
+
+		var delNode = [];
+		var change = "1";
+		d3.interval(function() {
+
+			for (var i = 0; i < links.length; i++) {
+				if ("0" != links[i].source.alarm || "0" != links[i].target.alarm) {
+					change = "0";
+					delNode.push(links[i]);
+					links.splice(i, 1);
+				}
+			}
+
+			if ("0" == change) {
+				restart();
+			}
+
+		}, 2000, d3.now());
+
+		d3.interval(function() {
+
+			for (var i = 0; i < delNode.length; i++) {
+				links.push(delNode.pop());
+
+			}
+
+			if ("0" == change) {
+				restart();
+			}
+
+		}, 2000, d3.now() + 1000);
+
+		function dragstarted(d) {
+			d3.select(this).raise().classed("active", true);
+		}
+
+		function dragged(d) {
+			d3.select(this).select("circle").attr("cx", d.x = d3.event.x).attr(
+					"cy", d.y = d3.event.y);
+			cell = cell.data(voronoi.polygons(circles)).attr("d", renderCell);
+		}
+
+		function dragended(d, i) {
+			d3.select(this).classed("active", false);
+		}
+
+		function ticked() {
+			node.attr("x", function(d) {
+				return d.x - 10;
+			}).attr("y", function(d) {
+				return d.y - 10;
+			})
+
+			text.attr("x", function(d) {
+				return d.x - (d.id.length * 4 + 8);
+			}).attr("y", function(d) {
+				return d.y + 15;
+			})
+
+			link.attr("x1", function(d) {
+				return d.source.x;
+			}).attr("y1", function(d) {
+				return d.source.y;
+			}).attr("x2", function(d) {
+				return d.target.x;
+			}).attr("y2", function(d) {
+				return d.target.y;
+			});
+		}
+
+		function restart() {
+
+			node = node.data(nodes, function(d) {
+				return d.id;
+			});
+
+			node.exit().transition().attr("height", 0).attr("width", 0).remove();
+
+			node = node
+			.enter()
+			.append("image")
+			.attr("title", node.id)
+			.call(d3.drag()
+					.on("start", dragstarted)
+					.on("drag", dragged)
+					.on("end", dragended))
+			.attr("href", function(d) {
+				var imgUrl;
+				if ("ManagedElement" == d.type) {
+					imgUrl = "aa.png";
+				} else if (d.type.indexOf("Function") > -1) {
+					imgUrl = "aa.png";
+				} else if (d.type.indexOf("Inventory") > -1
+						|| d.type.indexOf("EpRp") > -1) {
+					imgUrl = "aa.png";
+				} else if ("EthernetPort" == d.type) {
+					imgUrl = "aa.png";
+				} else {
+					imgUrl = "aa.png";
+				}
+				return imgUrl;
+			}).call(function(node) {
+				node.transition().attr("height", 20).attr("width", 20);
+			}).merge(node).text(function(d) {
+				return d.id;
+			});
+
+			text = text.data(nodes, function(d) {
+				return d.id;
+			});
+
+			text.exit().transition().attr("dx", 20).attr("dy", 8).remove();
+
+			text = text.enter().append("text").attr("fill", function(d) {
+				return color(d.id);
+			}).call(function(node) {
+				node.transition().attr("dx", 20).attr("dy", 8);
+			}).merge(text).text(function(d) {
+				return d.id;
+			});
+
+			link = link.data(links, function(d) {
+				return d.source.id + "-" + d.target.id;
+			});
+
+			link.exit().transition().attr("stroke-opacity", 0).attrTween("x1",
+					function(d) {
+						return function() {
+							return d.source.x;
+						};
+					}).attrTween("x2", function(d) {
+				return function() {
+					return d.target.x;
+				};
+			}).attrTween("y1", function(d) {
+				return function() {
+					return d.source.y;
+				};
+			}).attrTween("y2", function(d) {
+				return function() {
+					return d.target.y;
+				};
+			}).remove();
+
+			link = link.enter().append("line").call(function(link) {
+				link.transition().attr("stroke-opacity", 1);
+			}).merge(link);
+
+			simulation.nodes(nodes);
+			simulation.force("link").links(links);
+			simulation.alpha(1).restart();
+		}
+
+		node.on(
+				"mouseover",
+				function(d) {
+					
+					var x = d3.event.pageX;
+					var y = d3.event.pageY;
+					svg.append("text").attr("id", "tooltip").attr("x", x).attr("y",
+							y).attr("text-anchor", "middle").attr("font-family",
+							"sans-setif").attr("font-size", "11px").attr(
+							"font-weight", "bold").attr("fill", "black").text(
+							"设备类型" + d.type);
+				}).on("mouseout", function(d) {
+			d3.select("#tooltip").remove();
+		});
+
+		node.on("click", function(d) {
+			if (2 == d3.event.detail) {
+				viewDetail("VnfDetail.action?domain.rmuId=" + d.id);
+			}
+		});
+
+
+//显示详细信息
+function viewDetail(url) {
+}
+
+</script>
